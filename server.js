@@ -12,9 +12,13 @@ let drives = [];
 for (const drive of config) {
   drives.push(new Sinamics(drive));
 }
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
 
 const Polparam = () => {
   return [
+    { ...parameters.firmwareVersion },
     { ...parameters.driveOperationDisplay },
     { ...parameters.safelyRemoveMemoryCardStatus },
     { ...parameters.dcLinkVoltageSmoothed },
@@ -28,38 +32,34 @@ const Polparam = () => {
   ];
 };
 
-let pollTimeout;
-async function pollDrives() {
-  for (const drive of drives) {
+async function pollDrive(drive) {
+  return new Promise(async (resolve, reject) => {
     try {
-      let res = await drive.readParameters(Polparam());
-      console.log(`${drive.plcSettings.name} updated ${res.length} parameters`);
-    } catch (err) {
-      console.error(
-        `Error ${drive.plcSettings.name} readDrives: ${err} retry in 10s`
-      );
+      await drive.connect();
+      await drive.readParameters(Polparam());
+      await drive.disconnect();
+      resolve(`updated: ${drive.plcSettings.name}`);
+    } catch (error) {
+      reject(error);
     }
-  }
-
-  pollTimeout = setTimeout(pollDrives, 30 * 1000);
+  });
 }
 
 // function to stop polling
-function stopPollDB() {
-  clearTimeout(pollTimeout);
-}
 
 (async function() {
-  for (const drive of drives) {
-    try {
-      await drive.connect();
-      console.log(`connected to: ${drive.plcSettings.name}`);
-    } catch (error) {
-      console.log(`could not connect to: ${drive.plcSettings.name} ${error}`);
+  while (true) {
+    for (const drive of drives) {
+      try {
+        let polResult = await pollDrive(drive);
+        console.log(polResult);
+        await sleep(100);
+      } catch (error) {
+        console.log(`${drive.plcSettings.name} error: ${error}`);
+      }
     }
+    await sleep(10000);
   }
-
-  pollDrives();
 })();
 
 app.get("/api", (req, res) => {

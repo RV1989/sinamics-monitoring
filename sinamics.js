@@ -17,10 +17,20 @@ module.exports = class Sinamics {
     this.lastReadParameters = [];
     this.lastUpdated = Date.now();
     this.parameters = Object.values(parameters);
+    this.available = false;
   }
 
   async connect() {
-    return await this.s7Client.autoConnect();
+    return new Promise(async (resolve, reject) => {
+      try {
+        await this.s7Client.connect();
+        this.available = true;
+        resolve(true);
+      } catch (error) {
+        this.available = false;
+        reject(error);
+      }
+    });
   }
 
   async readParameters(parameters) {
@@ -60,7 +70,7 @@ module.exports = class Sinamics {
       ip: this.plcSettings.host,
       parameters: this.parameters.filter((x) => x.formattedValue !== undefined),
       lastUpdated: this.lastUpdated,
-      connected: this.s7Client.isConnected(),
+      available: this.available,
     };
   }
 };

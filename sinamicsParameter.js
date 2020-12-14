@@ -71,6 +71,7 @@ const driveOperationDisplay = {
 
 const firmwareVersion = {
   name: `r18 firmware version`,
+  prettyText: "Firmware",
   type: "DWORD",
   start: 0,
   area: "db",

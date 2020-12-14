@@ -1,6 +1,8 @@
+import moment from "moment";
 import React from "react";
 import styled from "styled-components";
 import MemoryCard from "./MemoryCard";
+
 const Card = styled.div`
   background-color: white;
   border-radius: 15px;
@@ -8,6 +10,13 @@ const Card = styled.div`
   margin: 30px;
   padding: 15px;
   ratio: 1.618;
+  @media print {
+    
+    min-height: 12cm;
+    padding: 0;
+    margin 0;
+    margin-top:5cm;
+  }
 `;
 const DriveName = styled.h2`
   text-align: center;
@@ -50,12 +59,21 @@ const ConnectionStatus = styled.hr`
   opacity: 0.5;
   margin: 0.7em;
 `;
+const Time = styled.p`
+  float: left;
+  font-size: 0.85rem;
+  text-align: left;
+  padding: 0;
+  opacity: 0.5;
+  margin: 0.5em;
+`;
 
 export default function Drive({ drive }) {
   return (
     <div>
       <Card>
         <CardHeader>
+          <Time>{moment(drive.lastUpdated).fromNow()}</Time>
           <MemoryCard
             memoryCard={
               drive.parameters.filter(
@@ -73,7 +91,7 @@ export default function Drive({ drive }) {
               )?.[0]?.formattedValue
             }
           </DriveStatus>
-          <ConnectionStatus connected={drive.connected} />
+          <ConnectionStatus connected={drive.available} />
         </CardHeader>
 
         <Ul>
@@ -88,7 +106,7 @@ export default function Drive({ drive }) {
                 <Parameter key={index}>
                   {" "}
                   {`${para.prettyText}: ${para.formattedValue.toFixed(2)} ${
-                    para.unit
+                    para.unit ? para.unit : ""
                   }`}
                 </Parameter>
               );

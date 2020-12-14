@@ -8,11 +8,20 @@ const Grid = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 10px;
+
+  @media print {
+    column-gap: 1cm;
+    row-gap: 0;
+    grid-auto-rows: 20.95cm;
+  }
 `;
 
 const H1 = styled.h1`
   color: white;
   text-align: center;
+  @media print {
+    display: none;
+  }
 `;
 
 const App = () => {
@@ -37,7 +46,7 @@ const App = () => {
   return (
     <div className="App">
       <H1>Siemens Drives info</H1>
-      <br />
+      <br className="doNotPrint" />
       <Grid>
         {drives.map((drive) => (
           <Drive key={drive.id} drive={drive} />

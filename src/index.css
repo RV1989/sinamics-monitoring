@@ -23,3 +23,13 @@ body {
   place-items: center;
   box-sizing: border-box;
 }
+
+@media print {
+  .doNotPrint {
+    display: none;
+  }
+
+  body {
+    background-image: none;
+  }
+}
