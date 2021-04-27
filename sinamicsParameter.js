@@ -270,6 +270,22 @@ const actualPowerUnitType = {
   dbnr: 203,
 };
 
+/*
+0: No calculation
+1: Complete calculation
+2: Calculation of equivalent circuit diagram parameters
+3: Calculation of closed-loop control parameters
+4: Calculation of controller parameters
+5: Calculation of technological limits and threshold values
+*/
+const automaticCalculationMotor = {
+  name: `P340 Automatic calculation motor/ control parameters`,
+  type: "INT",
+  start: 0,
+  area: "db",
+  dbnr: 340,
+};
+
 const faultCode = {
   name: `r945 fault code`,
   type: "WORD",
@@ -277,6 +293,7 @@ const faultCode = {
   area: "db",
   dbnr: 945,
 };
+
 const faultNumber = {
   name: `r947 fault number`,
   type: "WORD",
@@ -284,6 +301,63 @@ const faultNumber = {
   area: "db",
   dbnr: 947,
 };
+
+const resetDriveParameters = {
+  name: `p970 Reset Drive Parameters`,
+  type: "WORD",
+  start: 0,
+  area: "db",
+  dbnr: 970,
+};
+
+const saveParameters = {
+  name: `p971 Save Parameters`,
+  type: "WORD",
+  start: 0,
+  area: "db",
+  dbnr: 971,
+};
+
+const openLoopClosedLoopControlOperatingMode = {
+  name: `p1300 openLoopClosedLoopControlOperatingMode`,
+  type: "INT",
+  start: 0,
+  area: "db",
+  dbnr: 1300,
+};
+
+const startingCurrentVoltageBoostPermanent = {
+  name: `p1310 Starting current (Voltage Boost) permanent`,
+  type: "REAL",
+  start: 0,
+  area: "db",
+  dbnr: 1310,
+};
+
+const startingCurrentVoltageBoostWhenAccelerating = {
+  name: `p1311 Starting current (Voltage Boost) when accelerating`,
+  type: "REAL",
+  start: 0,
+  area: "db",
+  dbnr: 1311,
+};
+
+const startingCurrentVoltageBoostWhenStarting = {
+  name: `p1312 Starting current (Voltage Boost) when starting`,
+  type: "REAL",
+  start: 0,
+  area: "db",
+  dbnr: 1312,
+};
+
+const motorDataIdent = {
+  name: `p1900 Motor Data identification and rotating measurement`,
+  type: "INT",
+  start: 0,
+  area: "db",
+  dbnr: 1900,
+};
+
 const controlUnitTemperature = {
   name: `r3960 controlUnitTemperature`,
   prettyText: "Cu temp",
@@ -327,12 +401,11 @@ const safelyRemoveMemoryCardStatus = {
   },
 };
 function hex2bin(hex) {
-  return parseInt(hex, 16)
-    .toString(2)
-    .padStart(8, "0");
+  return parseInt(hex, 16).toString(2).padStart(8, "0");
 }
 const parameters = {
   driveOperationDisplay,
+  automaticCalculationMotor,
   firmwareVersion,
   speedSetpointSmoothed,
   actualSpeedSmoothed,
@@ -355,5 +428,12 @@ const parameters = {
   safelyRemoveMemoryCardStatus,
   faultCode,
   faultNumber,
+  resetDriveParameters,
+  saveParameters,
+  motorDataIdent,
+  startingCurrentVoltageBoostPermanent,
+  startingCurrentVoltageBoostWhenAccelerating,
+  startingCurrentVoltageBoostWhenStarting,
+  openLoopClosedLoopControlOperatingMode,
 };
 module.exports = parameters;

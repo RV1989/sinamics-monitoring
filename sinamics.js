@@ -1,8 +1,9 @@
 const { S7Client } = require("@rv1989/s7client");
 const parameters = require("./sinamicsParameter");
+var uniqid = require("uniqid");
 module.exports = class Sinamics {
   constructor({ id, name, ip }) {
-    this.id = id;
+    this.id = id ? id : uniqid();
     this.plcSettings = {
       name: name,
       host: ip,
@@ -51,6 +52,25 @@ module.exports = class Sinamics {
             this.parameters[foundIndex] = param;
           });
           resolve(this.lastReadParameters);
+        } catch (error) {
+          reject(error);
+        }
+      } else {
+        reject(new Error("client not connected"));
+      }
+    });
+  }
+
+  async writeParameter(parameter, value) {
+    let vars = { ...parameter, value };
+    return new Promise(async (resolve, reject) => {
+      if (this.s7Client.isConnected()) {
+        try {
+          let writeResult = await this.s7Client.writeVars([vars]);
+          this.lastUpdated = Date.now();
+          resolve(
+            `written ${writeResult[0].name} to ${writeResult[0].value} of ${this.plcSettings.name}`
+          );
         } catch (error) {
           reject(error);
         }
