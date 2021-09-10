@@ -2,7 +2,7 @@ const Sinamics = require("./sinamics");
 const parameters = require("./sinamicsParameter");
 const express = require("express");
 const path = require("path");
-const config = require("./config");
+const config = require("./config15BDF");
 const app = express();
 app.use(express.static(path.join(__dirname, "build")));
 const port = 8080;
@@ -19,6 +19,7 @@ function sleep(ms) {
 const Polparam = () => {
   return [
     { ...parameters.firmwareVersion },
+    /*
     { ...parameters.driveOperationDisplay },
     { ...parameters.safelyRemoveMemoryCardStatus },
     { ...parameters.dcLinkVoltageSmoothed },
@@ -29,6 +30,23 @@ const Polparam = () => {
     { ...parameters.energyConsumptionSaved },
     { ...parameters.controlUnitTemperature },
     { ...parameters.motorTemperature },
+    */
+
+    { ...parameters.driveOperationDisplay },
+    { ...parameters.safelyRemoveMemoryCardStatus },
+    { ...parameters.ratedMotorPower },
+    { ...parameters.currentLimit },
+    { ...parameters.torqueLimitUpper },
+    { ...parameters.torqueLimitLower },
+    { ...parameters.powerLimitMotoring },
+    { ...parameters.powerLimitRegenerative },
+    { ...parameters.torqueSetpointStatic },
+    { ...parameters.additionalAccelartionTorque },
+    { ...parameters.motorModelErrorTherholdStallDetection },
+    { ...parameters.changeMessageTypeMessage },
+    { ...parameters.changeMessageTypeType },
+    { ...parameters.pGain },
+    { ...parameters.iGain },
   ];
 };
 
@@ -47,7 +65,7 @@ async function pollDrive(drive) {
 
 // function to stop polling
 
-(async function() {
+(async function () {
   while (true) {
     for (const drive of drives) {
       try {
@@ -66,7 +84,7 @@ app.get("/api", (req, res) => {
   res.send(JSON.stringify(drives.map((d) => d.driveInfo())));
 });
 
-app.get("/", function(req, res) {
+app.get("/", function (req, res) {
   res.sendFile(path.join(__dirname, "build", "index.html"));
 });
 

@@ -1,0 +1,27 @@
+const drives = [
+  { ip: "172.3.73.68", name: "022-rc01043-Drive" },
+  { ip: "172.3.73.69", name: "023-rc01045-Drive" },
+  { ip: "172.3.73.70", name: "024-rc01047-Drive" },
+  { ip: "172.3.73.71", name: "025-rc01049-Drive" },
+  { ip: "172.3.73.72", name: "026-rc01051-Drive" },
+  { ip: "172.3.73.73", name: "027-rc01053-Drive" },
+  { ip: "172.3.73.74", name: "028-rc01055-Drive" },
+  { ip: "172.3.73.75", name: "029-rc01057-Drive" },
+  { ip: "172.3.73.83", name: "037-rc01092-Drive" },
+  { ip: "172.3.73.84", name: "038-rc01094-Drive" },
+  { ip: "172.3.73.85", name: "039-rc01096-Drive" },
+  { ip: "172.3.73.86", name: "040-rc01098-Drive" },
+  { ip: "172.3.73.87", name: "042-rc01101-Drive" },
+  { ip: "172.3.73.88", name: "043-rc01103-Drive" },
+  { ip: "172.3.73.89", name: "044-rc01105-Drive" },
+  { ip: "172.3.73.90", name: "045-rc01107-Drive" },
+  { ip: "172.3.73.91", name: "046-rc01111-Drive" },
+  { ip: "172.3.73.95", name: "049-cc01114-Drive" },
+  { ip: "172.3.73.94", name: "051-rc01114-Drive" },
+  { ip: "172.3.73.97", name: "052-cc01115-Drive" },
+  { ip: "172.3.73.98", name: "053-cc01115-Drive" },
+  { ip: "172.3.73.108", name: "076-cc01400-Drive" },
+  { ip: "172.3.73.119", name: "093-cc01500-Drive" },
+];
+
+module.exports = drives;

@@ -270,6 +270,26 @@ const actualPowerUnitType = {
   dbnr: 203,
 };
 
+const ratedMotorPower = {
+  name: `p307 Rated Motor Power`,
+  prettyText: "Rated Motor Power",
+  unit: `Kw`,
+  type: "REAL",
+  start: 0,
+  area: "db",
+  dbnr: 307,
+};
+
+const currentLimit = {
+  name: `p640 Current limit`,
+  prettyText: "Current limit",
+  unit: `A`,
+  type: "REAL",
+  start: 0,
+  area: "db",
+  dbnr: 640,
+};
+
 const faultCode = {
   name: `r945 fault code`,
   type: "WORD",
@@ -277,6 +297,7 @@ const faultCode = {
   area: "db",
   dbnr: 945,
 };
+
 const faultNumber = {
   name: `r947 fault number`,
   type: "WORD",
@@ -284,6 +305,173 @@ const faultNumber = {
   area: "db",
   dbnr: 947,
 };
+
+const resetDriveParameters = {
+  name: `p970 Reset Drive Parameters`,
+  type: "WORD",
+  start: 0,
+  area: "db",
+  dbnr: 970,
+};
+
+const saveParameters = {
+  name: `p971 Save Parameters`,
+  type: "WORD",
+  start: 0,
+  area: "db",
+  dbnr: 971,
+};
+
+const openLoopClosedLoopControlOperatingMode = {
+  name: `p1300 openLoopClosedLoopControlOperatingMode`,
+  type: "INT",
+  start: 0,
+  area: "db",
+  dbnr: 1300,
+};
+
+const startingCurrentVoltageBoostPermanent = {
+  name: `p1310 Starting current (Voltage Boost) permanent`,
+  type: "REAL",
+  start: 0,
+  area: "db",
+  dbnr: 1310,
+};
+
+const startingCurrentVoltageBoostWhenAccelerating = {
+  name: `p1311 Starting current (Voltage Boost) when accelerating`,
+  type: "REAL",
+  start: 0,
+  area: "db",
+  dbnr: 1311,
+};
+
+const startingCurrentVoltageBoostWhenStarting = {
+  name: `p1312 Starting current (Voltage Boost) when starting`,
+  type: "REAL",
+  start: 0,
+  area: "db",
+  dbnr: 1312,
+};
+
+const pGain = {
+  name: `p1470 Speed controller p-gain`,
+  prettyText: "p-gain",
+  unit: ``,
+  type: "REAL",
+  start: 0,
+  area: "db",
+  dbnr: 1470,
+};
+
+const iGain = {
+  name: `p1472 Speed controller integral time`,
+  prettyText: "Integral time",
+  unit: `ms`,
+  type: "REAL",
+  start: 0,
+  area: "db",
+  dbnr: 1472,
+};
+
+const torqueLimitUpper = {
+  name: `p1520 Torque limit Upper`,
+  prettyText: "Torque limit Upper",
+  unit: `Nm`,
+  type: "REAL",
+  start: 0,
+  area: "db",
+  dbnr: 1520,
+};
+
+const torqueLimitLower = {
+  name: `p1521 Torque limit lower`,
+  prettyText: "Torque limit lower",
+  unit: `Nm`,
+  type: "REAL",
+  start: 0,
+  area: "db",
+  dbnr: 1521,
+};
+
+const powerLimitMotoring = {
+  name: `p1530 powerLimitMotoring`,
+  prettyText: "Power limit motoring",
+  unit: `Kw`,
+  type: "REAL",
+  start: 0,
+  area: "db",
+  dbnr: 1530,
+};
+
+const powerLimitRegenerative = {
+  name: `p1531 powerLimit regenerative`,
+  prettyText: "Power limit regenerative",
+  unit: `Kw`,
+  type: "REAL",
+  start: 0,
+  area: "db",
+  dbnr: 1531,
+};
+
+const torqueSetpointStatic = {
+  name: `p1610 Torque setpoint static`,
+  prettyText: "Torque setpoint static",
+  unit: `%`,
+  type: "REAL",
+  start: 0,
+  area: "db",
+  dbnr: 1610,
+};
+
+const additionalAccelartionTorque = {
+  name: `p1611 Additional acceleration torque`,
+  prettyText: "Additional acceleration torque",
+  unit: `%`,
+  type: "REAL",
+  start: 0,
+  area: "db",
+  dbnr: 1611,
+};
+
+const motorModelErrorTherholdStallDetection = {
+  name: `p1745 Motor model error threshold stall detection`,
+  prettyText: "Motor model error threshold stall detection",
+  unit: `%`,
+  type: "REAL",
+  start: 0,
+  area: "db",
+  dbnr: 1745,
+};
+
+const changeMessageTypeMessage = {
+  name: `p2118 Change message type message number`,
+  prettyText: "Change message type message number",
+  unit: ``,
+  type: "WORD",
+  start: 0,
+  area: "db",
+  dbnr: 2118,
+};
+
+const changeMessageTypeType = {
+  name: `p2119 Change message type type`,
+  prettyText: "Change message type type",
+  unit: ``,
+  type: "INT",
+  start: 0,
+  area: "db",
+  dbnr: 2119,
+};
+
+const motorDataIdent = {
+  name: `p1900 Motor Data identification and rotating measurement`,
+  type: "INT",
+  start: 0,
+  area: "db",
+  dbnr: 1900,
+};
+
 const controlUnitTemperature = {
   name: `r3960 controlUnitTemperature`,
   prettyText: "Cu temp",
@@ -327,9 +515,7 @@ const safelyRemoveMemoryCardStatus = {
   },
 };
 function hex2bin(hex) {
-  return parseInt(hex, 16)
-    .toString(2)
-    .padStart(8, "0");
+  return parseInt(hex, 16).toString(2).padStart(8, "0");
 }
 const parameters = {
   driveOperationDisplay,
@@ -355,5 +541,25 @@ const parameters = {
   safelyRemoveMemoryCardStatus,
   faultCode,
   faultNumber,
+  resetDriveParameters,
+  saveParameters,
+  motorDataIdent,
+  startingCurrentVoltageBoostPermanent,
+  startingCurrentVoltageBoostWhenAccelerating,
+  startingCurrentVoltageBoostWhenStarting,
+  openLoopClosedLoopControlOperatingMode,
+  currentLimit,
+  torqueLimitUpper,
+  torqueLimitLower,
+  powerLimitMotoring,
+  powerLimitRegenerative,
+  torqueSetpointStatic,
+  additionalAccelartionTorque,
+  motorModelErrorTherholdStallDetection,
+  changeMessageTypeMessage,
+  changeMessageTypeType,
+  ratedMotorPower,
+  pGain,
+  iGain,
 };
 module.exports = parameters;

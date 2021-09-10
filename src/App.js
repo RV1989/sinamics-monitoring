@@ -12,7 +12,7 @@ const Grid = styled.div`
   @media print {
     column-gap: 1cm;
     row-gap: 0;
-    grid-auto-rows: 20.95cm;
+    grid-auto-rows: 19.6cm;
   }
 `;
 
